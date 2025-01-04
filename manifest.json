@@ -1,0 +1,14 @@
+{
+    "name": "Decode",
+    "id": "1457466397169061064",
+    "api": "1.0.0",
+    "main": "dist/code.js",
+    "capabilities": [],
+    "enableProposedApi": false,
+    "documentAccess": "dynamic-page",
+    "editorType": ["figma"],
+    "ui": "ui.html",
+    "networkAccess": {
+        "allowedDomains": ["none"]
+    }
+}

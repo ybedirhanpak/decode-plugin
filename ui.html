@@ -1,0 +1,12 @@
+<h2>Decode!</h2>
+<button id="selector">Select</button>
+<button id="close">Close</button>
+<script>
+    document.getElementById("selector").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "select" } }, "*");
+    };
+
+    document.getElementById("close").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "close" } }, "*");
+    };
+</script>
