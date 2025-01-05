@@ -1,6 +1,9 @@
 import { Message } from "./model/Message";
+import { createDesignComponentFromNode } from "./utils";
 
 figma.showUI(__html__);
+
+figma.ui.resize(400, 400);
 
 figma.ui.onmessage = (msg: Message) => {
     switch (msg.type) {
@@ -23,5 +26,10 @@ function handleClose() {
 function handleSelect() {
     const nodes = figma.currentPage.selection;
     const selectedNode = nodes[0];
-    console.log("selected node", selectedNode);
+    const designComponent = createDesignComponentFromNode(selectedNode);
+
+    figma.ui.postMessage({
+        type: "output",
+        data: designComponent,
+    });
 }
