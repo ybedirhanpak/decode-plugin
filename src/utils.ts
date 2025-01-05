@@ -6,6 +6,14 @@ import {
     LayerProperties,
 } from "./model/Design";
 
+function getContent(node: SceneNode): Pick<LayerProperties, "content"> {
+    return {
+        content: {
+            text: (node as TextNode).characters,
+        },
+    };
+}
+
 function getPositioning(node: SceneNode): Pick<LayerProperties, "positioning"> {
     return {
         positioning: {
@@ -125,6 +133,7 @@ function createLayerFromNode(node: SceneNode): Layer {
         name: node.name,
         type: node.type as unknown as LayerType,
         properties: {
+            ...getContent(node),
             ...getPositioning(node),
             ...getSize(node as unknown as FrameNode),
             ...getAutoLayout(node as unknown as FrameNode),

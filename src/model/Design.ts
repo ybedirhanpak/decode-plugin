@@ -1,6 +1,11 @@
 type LayerType = "frame" | "text" | "image" | "icon" | "vector" | "group";
 
 interface LayerProperties {
+    content?: {
+        text?: string;
+        image?: string;
+    };
+
     positioning?: {
         x?: number;
         y?: number;
