@@ -1,80 +1,121 @@
 type LayerType = "frame" | "text" | "image" | "icon" | "vector" | "group";
 
 interface LayerProperties {
-    // Positioning
-    x?: number;
-    y?: number;
-    position?: "absolute" | "relative" | "fixed";
-    zIndex?: number;
-
-    // Sizing
-    width?: number | "auto";
-    height?: number | "auto";
-    minWidth?: number;
-    minHeight?: number;
-    maxWidth?: number;
-    maxHeight?: number;
-
-    // Layout (Auto Layout)
-    layoutMode?: "none" | "horizontal" | "vertical";
-    primaryAxisAlignItems?: "start" | "center" | "end" | "space-between";
-    counterAxisAlignItems?: "start" | "center" | "end" | "stretch";
-    itemSpacing?: number;
-    padding?: {
-        top: number;
-        right: number;
-        bottom: number;
-        left: number;
+    positioning?: {
+        x?: number;
+        y?: number;
+        // position?: "absolute" | "relative" | "fixed";
+        // zIndex?: number;
     };
-    gap?: number;
+    size?: {
+        width?: number | "auto";
+        height?: number | "auto";
+        minWidth?: number;
+        minHeight?: number;
+        maxWidth?: number;
+        maxHeight?: number;
+    };
+    autoLayout?: {
+        layoutMode?: "NONE" | "HORIZONTAL" | "VERTICAL";
+        layoutWrap?: "NO_WRAP" | "WRAP";
+        paddingLeft?: number;
+        paddingRight?: number;
+        paddingTop?: number;
+        paddingBottom?: number;
+        horizontalPadding?: number;
+        verticalPadding?: number;
+        primaryAxisSizingMode?: "FIXED" | "AUTO";
+        counterAxisSizingMode?: "FIXED" | "AUTO";
+        primaryAxisAlignItems?: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN";
+        counterAxisAlignItems?: "MIN" | "MAX" | "CENTER" | "BASELINE";
+        counterAxisAlignContent?: "AUTO" | "SPACE_BETWEEN";
+        itemSpacing?: number;
+        counterAxisSpacing?: number | null;
+        itemReverseZIndex?: boolean;
+        strokesIncludedInLayout?: boolean;
+    };
+    autoLayoutChildren?: {
+        layoutAlign: "MIN" | "CENTER" | "MAX" | "STRETCH" | "INHERIT";
+        layoutGrow: number;
+        layoutPositioning: "AUTO" | "ABSOLUTE";
+    };
+    layout?: {
+        rotation?: number;
+        layoutSizingHorizontal: "FIXED" | "HUG" | "FILL";
+        layoutSizingVertical: "FIXED" | "HUG" | "FILL";
+        overflowDirection?: "NONE" | "HORIZONTAL" | "VERTICAL" | "BOTH";
+    };
 
     // Styling
-    backgroundColor?: string;
-    fills?: Array<{ color: string; type: "solid" | "gradient" | "image" }>;
-    border?: {
-        width: number;
-        color: string;
-        type: "solid" | "dashed" | "dotted";
+    styling?: {
+        visible?: boolean;
+        opacity?: number;
+        blendMode?:
+            | "PASS_THROUGH"
+            | "NORMAL"
+            | "DARKEN"
+            | "MULTIPLY"
+            | "LINEAR_BURN"
+            | "COLOR_BURN"
+            | "LIGHTEN"
+            | "SCREEN"
+            | "LINEAR_DODGE"
+            | "COLOR_DODGE"
+            | "OVERLAY"
+            | "SOFT_LIGHT"
+            | "HARD_LIGHT"
+            | "DIFFERENCE"
+            | "EXCLUSION"
+            | "HUE"
+            | "SATURATION"
+            | "COLOR"
+            | "LUMINOSITY";
+        backgrounds?: unknown;
+        fills?: unknown;
+        strokes?: unknown;
+        cornerRadius?:
+            | number
+            | {
+                  topLeft: number;
+                  topRight: number;
+                  bottomLeft: number;
+                  bottomRight: number;
+              };
+        effects?: unknown;
     };
-    borderRadius?:
-        | number
-        | {
-              topLeft?: number;
-              topRight?: number;
-              bottomLeft?: number;
-              bottomRight?: number;
-          };
-    effects?: Array<{
-        type: "shadow" | "blur";
-        x: number;
-        y: number;
-        blur: number;
-        spread?: number;
-        color?: string;
-    }>;
 
-    // Text-Specific Properties
     font?: {
-        family?: string;
-        size?: number;
-        weight?: number | string;
-        style?: "normal" | "italic";
-        lineHeight?: number | "auto";
-        letterSpacing?: number;
-        decoration?: "none" | "underline" | "line-through";
-        alignment?: "left" | "center" | "right" | "justify";
+        fontName?: {
+            family: string;
+            style: string;
+        };
+        fontSize?: number;
+        fontWeight?: number | string;
+        lineHeight?:
+            | {
+                  value: number;
+                  unit: "PIXELS" | "PERCENT";
+              }
+            | {
+                  unit: "AUTO";
+              };
+        letterSpacing?: {
+            value: number;
+            unit: "PIXELS" | "PERCENT";
+        };
     };
-    textColor?: string;
 
-    // Interactions
-    cursor?: "default" | "pointer" | "text" | "move";
-    visible?: boolean;
+    text?: {
+        textFills?: unknown;
+        textAlignHorizontal: "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED";
+        textAlignVertical: "TOP" | "CENTER" | "BOTTOM";
+        textAutoResize: "NONE" | "WIDTH_AND_HEIGHT" | "HEIGHT" | "TRUNCATE";
+    };
 
-    // Advanced Features
-    overflow?: "visible" | "hidden" | "scroll" | "auto";
-    rotation?: number;
-    opacity?: number;
-    name?: string;
+    constraints?: {
+        horizontal: "MIN" | "CENTER" | "MAX" | "STRETCH" | "SCALE";
+        vertical: "MIN" | "CENTER" | "MAX" | "STRETCH" | "SCALE";
+    };
 }
 
 interface Layer {
